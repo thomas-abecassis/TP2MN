@@ -8,13 +8,13 @@
 
 #define    NB_FOIS        4194304
 
-void test01{
+void test01(){
   complexe_float_t c1= {1.0, 2.0} ;
  complexe_float_t c2= {3.0, 6.0} ;
  complexe_float_t c3 ;
 
  c3=div_complexe_float(c2,c1);
- printf("(%f+i%f)/(%f+i%f)=%f+i%f\n",c2.real,c2.imaginary,c1.real,c1.imaginary,c3.real,c3.imaginary)
+ printf("(%f+i%f)/(%f+i%f)=%f+i%f\n",c2.real,c2.imaginary,c1.real,c1.imaginary,c3.real,c3.imaginary);
 }
 
 int main (int argc, char **argv)
@@ -53,6 +53,7 @@ int main (int argc, char **argv)
    }
 
  end = _rdtsc () ;
+
  test01();
 
   printf ("apres boucle cd3.real %f cd3.imaginary %f %lld cycles \n", cd3.real, cd3.imaginary, end-start) ;
@@ -78,7 +79,6 @@ int main (int argc, char **argv)
 
   printf ("apres boucle cd3.real %f cd3.imaginary %f %lld cycles \n", cd3.real, cd3.imaginary, end-start) ;
 
-  calcul_flop ("calcul complexe ", NB_FOIS*4, end-start) ;
-
+  calcul_flop ("calcul complexe ", NB_FOIS*4, end-start) ;  
   exit (0) ;
 }

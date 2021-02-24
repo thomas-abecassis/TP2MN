@@ -8,6 +8,15 @@
 
 #define    NB_FOIS        4194304
 
+void test01{
+  complexe_float_t c1= {1.0, 2.0} ;
+ complexe_float_t c2= {3.0, 6.0} ;
+ complexe_float_t c3 ;
+
+ c3=div_complexe_float(c2,c1);
+ printf("(%f+i%f)/(%f+i%f)=%f+i%f\n",c2.real,c2.imaginary,c1.real,c1.imaginary,c3.real,c3.imaginary)
+}
+
 int main (int argc, char **argv)
 {
  complexe_float_t c1= {1.0, 2.0} ;
@@ -38,10 +47,13 @@ int main (int argc, char **argv)
  
  for (i = 0 ; i < NB_FOIS; i++)
    {
+     
      cd3 = add_complexe_double (cd1, cd2) ;
+
    }
 
  end = _rdtsc () ;
+ test01();
 
   printf ("apres boucle cd3.real %f cd3.imaginary %f %lld cycles \n", cd3.real, cd3.imaginary, end-start) ;
 

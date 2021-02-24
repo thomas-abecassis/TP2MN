@@ -55,6 +55,7 @@ int main (int argc, char **argv)
  printf ("cd3.r %f cd3.i %f\n", cd3.real, cd3.imaginary) ;
 
  start =_rdtsc () ;
+ int test=0;
  
  for (i = 0 ; i < NB_FOIS; i++)
    {

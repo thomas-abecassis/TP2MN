@@ -76,13 +76,13 @@ complexe_double_t mult_complexe_double (const complexe_double_t c1, const comple
 complexe_float_t div_complexe_float (const complexe_float_t c1, const complexe_float_t c2) {
 
   complexe_float_t c=mult_complexe_float(c1,conjugue_float(c2));
-  c=mult_scalaire_float(c,module_carre_float(c2));
+  c=mult_scalaire_float(c,1/module_carre_float(c2));
   return c;
 }
 
 complexe_double_t div_complexe_double (const complexe_double_t c1, const complexe_double_t c2){
   complexe_double_t c=mult_complexe_double(c1,conjugue_double(c2));
-  c=mult_scalaire_double(c,module_carre_double(c2));
+  c=mult_scalaire_double(c,1/module_carre_double(c2));
   return c;
 }
   

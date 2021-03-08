@@ -36,6 +36,12 @@ test_complexe2.o: test_complexe2.c  $(INC_DIR)/complexe2.h
 test_complexe2: test_complexe2.o flop.o
 	gcc -o test_complexe2 test_complexe2.o flop.o $(OPTIONS_LINK_STATIC)
 
+test_swap.o: test_swap.c
+	gcc $(OPTIONS_COMPIL) -c test_swap.c
+
+test_swap: test_swap.o flop.o
+	gcc -o test_swap test_swap.o flop.o $(OPTIONS_LINK_STATIC)
+
 
 clean:
 	rm -f *.o test_dot test_dot_dyn test_complexe test_complexe2 *~

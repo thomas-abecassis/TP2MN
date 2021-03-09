@@ -36,6 +36,9 @@ swap.o : swap.c $(INC_DIR)/mnblas.h $(INC_DIR)/complexe.h
 dot.o : dot.c $(INC_DIR)/mnblas.h
 	gcc  $(OPTIONS) -c dot.c
 
+axpy.o : axpy.c $(INC_DIR)/mnblas.h $(INC_DIR)/complexe.h
+	gcc  $(OPTIONS) -c axpy.c
+
 # BLAS 2
 
 # BLAS 3

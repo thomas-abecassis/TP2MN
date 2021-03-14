@@ -1,4 +1,4 @@
-all: test_complexe2 test_complexe test_dot test_dot_dyn
+all: test_complexe2 test_complexe test_dot test_dot_dyn test_axpy
 
 INC_DIR=../include
 

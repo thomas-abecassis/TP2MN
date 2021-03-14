@@ -4,6 +4,8 @@ INC_DIR=../include
 
 LIB_DIR=../lib
 
+SRC_DIR=../src
+
 LIBST=-lmnblas
 LIBDYN=-lmnblasdyn
 
@@ -42,6 +44,12 @@ test_swap.o: test_swap.c
 test_swap: test_swap.o flop.o
 	gcc -o test_swap test_swap.o flop.o $(OPTIONS_LINK_STATIC)
 
+test_axpy.o: test_axpy.c
+	gcc $(OPTIONS_COMPIL) -c test_axpy.c
+
+test_axpy: test_axpy.o flop.o
+	gcc -o test_axpy test_axpy.o flop.o $(OPTIONS_LINK_STATIC)
+
 
 clean:
-	rm -f *.o test_dot test_dot_dyn test_complexe test_complexe2 *~
+	rm -f *.o test_dot test_dot_dyn test_complexe test_complexe2 test_axpy *~

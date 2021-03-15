@@ -1,8 +1,10 @@
-all: test_complexe2 test_complexe test_dot test_dot_dyn
+all: test_complexe2 test_complexe test_dot test_dot_dyn test_axpy test_asum test_iamin test_iamax
 
 INC_DIR=../include
 
 LIB_DIR=../lib
+
+SRC_DIR=../src
 
 LIBST=-lmnblas
 LIBDYN=-lmnblasdyn
@@ -42,6 +44,30 @@ test_swap.o: test_swap.c
 test_swap: test_swap.o flop.o
 	gcc -o test_swap test_swap.o flop.o $(OPTIONS_LINK_STATIC)
 
+test_axpy.o: test_axpy.c
+	gcc $(OPTIONS_COMPIL) -c test_axpy.c
+
+test_axpy: test_axpy.o flop.o
+	gcc -o test_axpy test_axpy.o flop.o $(OPTIONS_LINK_STATIC)
+
+test_asum.o: test_asum.c
+	gcc $(OPTIONS_COMPIL) -c test_asum.c
+
+test_asum: test_asum.o flop.o
+	gcc -o test_asum test_asum.o flop.o $(OPTIONS_LINK_STATIC)
+
+test_iamin.o: test_iamin.c
+	gcc $(OPTIONS_COMPIL) -c test_iamin.c
+
+test_iamin: test_iamin.o flop.o
+	gcc -o test_iamin test_iamin.o flop.o $(OPTIONS_LINK_STATIC)
+
+test_iamax.o: test_iamax.c
+	gcc $(OPTIONS_COMPIL) -c test_iamax.c
+
+test_iamax: test_iamax.o flop.o
+	gcc -o test_iamax test_iamax.o flop.o $(OPTIONS_LINK_STATIC)
+
 
 clean:
-	rm -f *.o test_dot test_dot_dyn test_complexe test_complexe2 *~
+	rm -f *.o test_dot test_dot_dyn test_complexe test_complexe2 test_axpy *~

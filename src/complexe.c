@@ -1,5 +1,18 @@
 #include "complexe.h"
 
+float float_abs(float x){
+    if(x <0)
+        return -x;
+    return x;
+}
+
+double double_abs(double x){
+    if(x<0)
+        return -x;
+    return x;
+}
+
+
 complexe_double_t conjugue_double(complexe_double_t c){
   complexe_double_t new_c;
   new_c.real=c.real;
@@ -85,6 +98,22 @@ complexe_double_t div_complexe_double (const complexe_double_t c1, const complex
   c=mult_scalaire_double(c,1/module_carre_double(c2));
   return c;
 }
-  
 
+complexe_float_t scal_complexe_float(const complexe_float_t c, int x){
+  complexe_float_t ret;
+
+  ret.real = c.real * x;
+  ret.imaginary = c.imaginary * x;
+
+  return ret;
+}
+  
+complexe_double_t scal_complexe_double(const complexe_double_t c, int x){
+  complexe_double_t ret;
+
+  ret.real = c.real * x;
+  ret.imaginary = c.imaginary * x;
+
+  return ret;
+}
 

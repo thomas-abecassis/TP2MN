@@ -58,3 +58,4 @@ examples/test_asum
 examples/test_iamax
 examples/test_iamin
 lib/libmnblas.a
+lib/libmnblas.a

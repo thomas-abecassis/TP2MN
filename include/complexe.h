@@ -25,6 +25,10 @@ complexe_float_t scal_complexe_float(const complexe_float_t c, int x);
 
 complexe_double_t scal_complexe_double(const complexe_double_t c, int x);
 
+float module_carre_float(complexe_float_t c);
+
+double module_carre_double(complexe_double_t c);
+
 float float_abs(float x);
 
 double double_abs(double x);

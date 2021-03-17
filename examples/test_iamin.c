@@ -51,7 +51,7 @@ int main(){
         start=_rdtsc();
         mnblas_icamin(VECSIZE,vect_cf_1,1);
         end=_rdtsc();
-        printf("temps d'execution:%Ld ",end-start);
+        printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
 
@@ -66,7 +66,7 @@ int main(){
         start=_rdtsc();
         mnblas_izamin(VECSIZE, vect_cf_1, 1);
         end=_rdtsc();
-        printf("temps d'execution:%Ld ",end-start);
+        printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
     return 0;

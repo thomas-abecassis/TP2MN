@@ -71,9 +71,9 @@ int main(){
            vect_cf_1[i].real=2.2;
         }
         start=_rdtsc();
-        mnblas_caxpy(VECSIZE,vect_cf_1,1,vect_cf_2,1);
+        mnblas_caxpy(VECSIZE,&a,vect_cf_1,1,vect_cf_2,1);
         end=_rdtsc();
-        printf("temps d'execution:%Ld ",end-start);
+        printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
     printf("test complex double\n");
@@ -88,9 +88,9 @@ int main(){
            vect_cd_1[i].real=2.2;
         }
         start=_rdtsc();
-        mnblas_zaxpy(VECSIZE,vect_cd_1,1,vect_cd_2,1);
+        mnblas_zaxpy(VECSIZE,&ad,vect_cd_1,1,vect_cd_2,1);
         end=_rdtsc();
-        printf("temps d'execution:%Ld ",end-start);
+        printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
     return 0;

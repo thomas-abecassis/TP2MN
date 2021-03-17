@@ -80,7 +80,7 @@ int main(){
         start=_rdtsc();
         mncblas_cswap(VECSIZE,vect_cf_1,1,vect_cf_2,1);
         end=_rdtsc();
-        printf("temps d'execution:%Ld ",end-start);
+        printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
     printf("test complex double\n");
@@ -97,7 +97,7 @@ int main(){
         start=_rdtsc();
         mncblas_zswap(VECSIZE,vect_cd_1,1,vect_cd_2,1);
         end=_rdtsc();
-        printf("temps d'execution:%Ld ",end-start);
+        printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
 

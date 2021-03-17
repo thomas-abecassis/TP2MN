@@ -15,13 +15,13 @@ OPTIONS_LINK_STATIC  =   -fopenmp -L$(LIB_DIR) $(LIBST)
 OPTIONS_LINK_DYN  = -fopenmp -L$(LIB_DIR) $(LIBDYN)  
 
 test_dot: test_dot.o flop.o $(LIB_DIR)/libmnblas.a
-	gcc -o test_dot test_dot.o flop.o $(OPTIONS_LINK_STATIC)
+	gcc -o test_dot test_dot.o flop.o $(OPTIONS_LINK_STATIC) 
 
 flop.o: flop.c flop.h
 	gcc $(OPTIONS_COMPIL) -c flop.c
 
 test_dot_dyn: test_dot.o flop.o
-	gcc -o test_dot_dyn flop.o test_dot.o $(OPTIONS_LINK_DYN)
+	gcc -o test_dot_dyn flop.o test_dot.o $(OPTIONS_LINK_DYN) -lm
 
 test_dot.o: test_dot.c $(INC_DIR)/mnblas.h
 	gcc $(OPTIONS_COMPIL) -c test_dot.c

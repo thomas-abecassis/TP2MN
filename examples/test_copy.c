@@ -75,13 +75,13 @@ int main(){
         start=_rdtsc();
         mncblas_ccopy(VECSIZE,vect_cf_1,1,vect_cf_2,1);
         end=_rdtsc();
-        printf("temps d'execution:%Ld ",end-start);
+        printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
     printf("test complex double\n");
     free(vect_cd_1);
     init_flop();
-    vect_cf_1=malloc(sizeof(complexe_double_t)*VECSIZE);
+    vect_cd_1=malloc(sizeof(complexe_double_t)*VECSIZE);
     for(int i=0;i<NB_FOIS;i++){
         for(int i=0;i<VECSIZE;i++){
            vect_cd_1[i].imaginary=1.1;
@@ -92,7 +92,7 @@ int main(){
         start=_rdtsc();
         mncblas_zcopy(VECSIZE,vect_cd_1,1,vect_cd_2,1);
         end=_rdtsc();
-        printf("temps d'execution:%Ld ",end-start);
+        printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
 

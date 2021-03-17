@@ -1,18 +1,6 @@
 #include "mnblas.h"
 #include "complexe.h"
 
-float float_abs(float x){
-    if(x <0)
-        return -x;
-    return x;
-}
-
-double double_abs(double x){
-    if(x<0)
-        return -x;
-    return x;
-}
-
 float  mnblas_sasum(const int N, const float *X, const int incX){
     register unsigned int i = 0 ;
     float ret=0;

@@ -24,3 +24,7 @@ complexe_double_t div_complexe_double (const complexe_double_t c1, const complex
 complexe_float_t scal_complexe_float(const complexe_float_t c, int x);
 
 complexe_double_t scal_complexe_double(const complexe_double_t c, int x);
+
+float float_abs(float x);
+
+double double_abs(double x);

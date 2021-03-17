@@ -1,5 +1,18 @@
 #include "complexe.h"
 
+float float_abs(float x){
+    if(x <0)
+        return -x;
+    return x;
+}
+
+double double_abs(double x){
+    if(x<0)
+        return -x;
+    return x;
+}
+
+
 complexe_double_t conjugue_double(complexe_double_t c){
   complexe_double_t new_c;
   new_c.real=c.real;

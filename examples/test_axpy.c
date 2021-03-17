@@ -6,7 +6,12 @@
 
 #include "flop.h"
 
+#define VECSIZE    65536
+
+#define NB_FOIS    10
+
 int main(){
+    unsigned long long start,end;
 
     float fv1[2] = {2,2};
     float fv2[2] = {1,1};
@@ -52,5 +57,41 @@ int main(){
 
     mnblas_zaxpy(2, &ad, vect_cd_1, 1, vect_cd_2, 1);
     printf("zaxpy pour (2,2), {(1,1),(1,1)} et {(2,2),(2,2)} : {(%f, %f), (%f, %f)} \n", vect_cd_2[0].real, vect_cd_2[0].imaginary, vect_cd_2[1].real, vect_cd_2[1].imaginary);
+
+    printf("\n\nteste performance\n");
+    printf("test complex float\n");
+    free(vect_cf_1);
+    free(vect_cf_2);
+    init_flop();
+    vect_cf_1=malloc(sizeof(complexe_float_t)*VECSIZE);
+    vect_cf_2=malloc(sizeof(complexe_float_t)*VECSIZE);
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_cf_1[i].imaginary=1.1;
+           vect_cf_1[i].real=2.2;
+        }
+        start=_rdtsc();
+        mnblas_caxpy(VECSIZE,vect_cf_1,1,vect_cf_2,1);
+        end=_rdtsc();
+        printf("temps d'execution:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
+    printf("test complex double\n");
+    free(vect_cd_1);
+    free(vect_cd_2);
+    init_flop();
+    vect_cf_1=malloc(sizeof(complexe_double_t)*VECSIZE);
+    vect_cf_2=malloc(sizeof(complexe_double_t)*VECSIZE);
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_cd_1[i].imaginary=1.1;
+           vect_cd_1[i].real=2.2;
+        }
+        start=_rdtsc();
+        mnblas_zaxpy(VECSIZE,vect_cd_1,1,vect_cd_2,1);
+        end=_rdtsc();
+        printf("temps d'execution:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
     return 0;
 }

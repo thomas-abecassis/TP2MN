@@ -6,7 +6,15 @@
 
 #include "flop.h"
 
+#define VECSIZE    65536
+
+#define NB_FOIS    10
+
+
 int main(){
+    unsigned long long start, end ;
+
+
     float* vect_float_1 = malloc(sizeof(float) * 2);
     vect_float_1[0]=1; vect_float_1[1]=2;
     float* vect_float_2 = malloc(sizeof(float) * 2);
@@ -51,6 +59,44 @@ int main(){
 
     printf("vecteur double 1 : {%f + %fi, %f + %fi} \n", vect_cd_1[0].real, vect_cd_1[0].imaginary, vect_cd_1[1].real, vect_cd_1[1].imaginary);
     printf("vecteur double 2 : {%f + %fi, %f + %fi} \n", vect_cd_2[0].real, vect_cd_2[0].imaginary, vect_cd_2[1].real, vect_cd_2[1].imaginary);  
+
+    printf("\n\nteste performance\n");
+    printf("test complex float\n");
+    free(vect_cf_1);
+    init_flop();
+    vect_cf_1=malloc(sizeof(complexe_float_t)*VECSIZE);
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_cf_1[i].imaginary=1.1;
+           vect_cf_1[i].real=2.2;
+        }
+        free(vect_cf_2);
+        vect_cf_2=malloc(sizeof(complexe_float_t)*VECSIZE);
+        start=_rdtsc();
+        mncblas_ccopy(VECSIZE,vect_cf_1,1,vect_cf_2,1);
+        end=_rdtsc();
+        printf("temps d'execution:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
+    printf("test complex double\n");
+    free(vect_cd_1);
+    init_flop();
+    vect_cf_1=malloc(sizeof(complexe_double_t)*VECSIZE);
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_cd_1[i].imaginary=1.1;
+           vect_cd_1[i].real=2.2;
+        }
+        free(vect_cd_2);
+        vect_cd_2=malloc(sizeof(complexe_double_t)*VECSIZE);
+        start=_rdtsc();
+        mncblas_zcopy(VECSIZE,vect_cd_1,1,vect_cd_2,1);
+        end=_rdtsc();
+        printf("temps d'execution:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
+
+
 
     return 0;
 

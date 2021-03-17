@@ -1,4 +1,4 @@
-all: test_complexe2 test_complexe test_dot test_dot_dyn test_axpy test_asum test_iamin
+all: test_complexe2 test_complexe test_dot test_dot_dyn test_axpy test_asum test_iamin test_iamax
 
 INC_DIR=../include
 
@@ -61,6 +61,12 @@ test_iamin.o: test_iamin.c
 
 test_iamin: test_iamin.o flop.o
 	gcc -o test_iamin test_iamin.o flop.o $(OPTIONS_LINK_STATIC)
+
+test_iamax.o: test_iamax.c
+	gcc $(OPTIONS_COMPIL) -c test_iamax.c
+
+test_iamax: test_iamax.o flop.o
+	gcc -o test_iamax test_iamax.o flop.o $(OPTIONS_LINK_STATIC)
 
 
 clean:

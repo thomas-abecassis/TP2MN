@@ -158,7 +158,6 @@ double mnblas_dznrm2(const int N, const void *X, const int incX);
  * ===========================================================================
  */
 
-/*
 
 void mncblas_sgemv(const MNCBLAS_LAYOUT layout,
                  const MNCBLAS_TRANSPOSE TransA, const int M, const int N,
@@ -183,8 +182,6 @@ void mncblas_zgemv(MNCBLAS_LAYOUT layout,
                  const void *alpha, const void *A, const int lda,
                  const void *X, const int incX, const void *beta,
                  void *Y, const int incY);
-
-*/
 
 /*
  * ===========================================================================

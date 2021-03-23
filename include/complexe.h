@@ -21,9 +21,13 @@ complexe_float_t div_complexe_float (const complexe_float_t c1, const complexe_f
 
 complexe_double_t div_complexe_double (const complexe_double_t c1, const complexe_double_t c2) ;
 
-complexe_float_t scal_complexe_float(const complexe_float_t c, int x);
+complexe_float_t scal_complexe_float(const complexe_float_t c, float x);
 
-complexe_double_t scal_complexe_double(const complexe_double_t c, int x);
+complexe_double_t scal_complexe_double(const complexe_double_t c, double x);
+
+complexe_double_t conjugue_double(complexe_double_t c);
+
+complexe_float_t conjugue_float(complexe_float_t c);
 
 float module_carre_float(complexe_float_t c);
 

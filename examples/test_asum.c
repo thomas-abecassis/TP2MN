@@ -6,7 +6,12 @@
 
 #include "flop.h"
 
+#define VECSIZE    65536
+
+#define NB_FOIS    10
+
 int main(){
+    unsigned long long start, end ;
 
     float fv1[2] = {2,2};
     
@@ -33,5 +38,40 @@ int main(){
     vect_cd_1[0]=cd11; vect_cd_1[1]=cd12;
 
     printf("dzasum pour {(-1,1),(1,1)} : %f \n", mnblas_dzasum(2, vect_cd_1, 1));
+    free(vect_cf_1);
+    free(vect_cd_1);
+
+
+    printf("\n\nteste performance\n");
+    printf("test complex float\n");
+    vect_cf_1=malloc(sizeof(complexe_float_t)*VECSIZE);
+    init_flop();
+    
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_cf_1[i].imaginary=1.1;
+           vect_cf_1[i].real=2.2;
+        }
+        start=_rdtsc();
+        mnblas_scasum(2,vect_cf_1,1);
+        end=_rdtsc();
+        printf("nombre de cycle:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
+
+    printf("\ntest complex double\n");
+    init_flop();
+    vect_cd_1=malloc(sizeof(complexe_double_t)*VECSIZE);
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_cd_1[i].imaginary=1.1;
+           vect_cd_1[i].real=2.2;
+        }
+        start=_rdtsc();
+        mnblas_dzasum(2,vect_cd_1,1);
+        end=_rdtsc();
+        printf("nombre de cycle:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
     return 0;
 }

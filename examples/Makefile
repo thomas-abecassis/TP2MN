@@ -1,4 +1,4 @@
-all: test_complexe2 test_complexe test_dot test_dot_dyn test_axpy test_asum test_iamin test_iamax test_snrm2 test_gemv
+all: test_complexe2 test_complexe test_dot test_dot_dyn test_axpy test_asum test_iamin test_iamax test_snrm2 test_gemv test_copy
 
 INC_DIR=../include
 
@@ -15,13 +15,13 @@ OPTIONS_LINK_STATIC  =   -fopenmp -L$(LIB_DIR) $(LIBST)
 OPTIONS_LINK_DYN  = -fopenmp -L$(LIB_DIR) $(LIBDYN)  
 
 test_dot: test_dot.o flop.o $(LIB_DIR)/libmnblas.a
-	gcc -o test_dot test_dot.o flop.o $(OPTIONS_LINK_STATIC)
+	gcc -o test_dot test_dot.o flop.o $(OPTIONS_LINK_STATIC) 
 
 flop.o: flop.c flop.h
 	gcc $(OPTIONS_COMPIL) -c flop.c
 
 test_dot_dyn: test_dot.o flop.o
-	gcc -o test_dot_dyn flop.o test_dot.o $(OPTIONS_LINK_DYN)
+	gcc -o test_dot_dyn flop.o test_dot.o $(OPTIONS_LINK_DYN) -lm
 
 test_dot.o: test_dot.c $(INC_DIR)/mnblas.h
 	gcc $(OPTIONS_COMPIL) -c test_dot.c
@@ -43,6 +43,12 @@ test_swap.o: test_swap.c
 
 test_swap: test_swap.o flop.o
 	gcc -o test_swap test_swap.o flop.o $(OPTIONS_LINK_STATIC)
+
+test_copy.o: test_copy.c
+	gcc $(OPTIONS_COMPIL) -c test_copy.c
+
+test_copy: test_copy.o flop.o
+	gcc -o test_copy test_copy.o flop.o $(OPTIONS_LINK_STATIC)
 
 test_axpy.o: test_axpy.c
 	gcc $(OPTIONS_COMPIL) -c test_axpy.c

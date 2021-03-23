@@ -78,20 +78,20 @@ void mncblas_cgemv(MNCBLAS_LAYOUT layout,
         col = N;
     }
 
-    for (int i= 0; i< row*col ; i += incX){
+    for (int i= 0; i< row ; i += incX){
         complexe_float_t value = {0,0};
         int t = col;
         if(TransA != MNCblasNoTrans)
             t = row;
         for (int k=0; k<t; k++){
-            if(TransA==MNCblasNoTrans)
+            if(TransA==MNCblasNoTrans){
                 value=add_complexe_float(value,mult_complexe_float(mult_complexe_float(Ac[i*col+k],Alphac), Xc[i]));
+            }
             else if(TransA==MNCblasTrans)
                 value=add_complexe_float(value, mult_complexe_float(mult_complexe_float(Ac[i+k*col],Alphac), Xc[i]));
             else
                 value=add_complexe_float(value,mult_complexe_float(mult_complexe_float(conjugue_float(Ac[i+k*col]),Alphac), Xc[i]));
         }
-        printf("{%f, %f \n}",value.real, value.imaginary);
         Yc[i]=add_complexe_float(value, mult_complexe_float(Yc[i],Betac));
     }
 }

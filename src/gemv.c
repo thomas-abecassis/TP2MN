@@ -12,10 +12,6 @@ void mncblas_sgemv(const MNCBLAS_LAYOUT layout,
 
     int row = N;
     int col = M;
-    if(layout == MNCblasRowMajor){
-        row = M;
-        col = N;
-    }
 
     for (int i= 0; i< row*col ; i += incX){
         float value = 0;
@@ -39,10 +35,6 @@ void mncblas_dgemv(MNCBLAS_LAYOUT layout,
                  double *Y, const int incY){
     int row = N;
     int col = M;
-    if(layout == MNCblasRowMajor){
-        row = M;
-        col = N;
-    }
 
     for (int i= 0; i< row*col ; i += incX){
         double value = 0;
@@ -72,11 +64,6 @@ void mncblas_cgemv(MNCBLAS_LAYOUT layout,
     complexe_float_t* Ac= (complexe_float_t*) A;
     complexe_float_t Alphac= *(complexe_float_t*) alpha;
     complexe_float_t Betac= *(complexe_float_t*) beta;
-
-    if(layout == MNCblasRowMajor){
-        row = M;
-        col = N;
-    }
 
     for (int i= 0; i< row ; i += incX){
         complexe_float_t value = {0,0};
@@ -109,12 +96,7 @@ void mncblas_zgemv(MNCBLAS_LAYOUT layout,
     complexe_double_t* Ac= (complexe_double_t*) A;
     complexe_double_t Alphac= *(complexe_double_t*) alpha;
     complexe_double_t Betac= *(complexe_double_t*) beta;
-
-    if(layout == MNCblasRowMajor){
-        row = M;
-        col = N;
-    }
-
+    
     for (int i= 0; i< row*col ; i += incX){
         complexe_double_t value = {0,0};
         int t = col;

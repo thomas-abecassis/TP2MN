@@ -1,4 +1,4 @@
-all: test_complexe2 test_complexe test_dot test_dot_dyn test_axpy test_asum test_iamin test_iamax test_snrm2 test_gemv test_copy
+all: test_complexe2 test_complexe test_dot test_dot_dyn test_axpy test_asum test_iamin test_iamax test_snrm2 test_gemv test_copy test_gemm
 
 INC_DIR=../include
 
@@ -84,8 +84,14 @@ test_gemv.o: test_gemv.c
 	gcc $(OPTIONS_COMPIL) -c test_gemv.c
 
 test_gemv: test_gemv.o flop.o
-	gcc -o test_gemv test_gemv.o flop.o $(OPTIONS_LINK_STATIC) -lm
+	gcc -o test_gemv test_gemv.o flop.o $(OPTIONS_LINK_STATIC) 
+
+test_gemm.o: test_gemm.c
+	gcc $(OPTIONS_COMPIL) -c test_gemm.c
+
+test_gemm: test_gemm.o flop.o
+	gcc -o test_gemm test_gemm.o flop.o $(OPTIONS_LINK_STATIC) 
 
 
 clean:
-	rm -f *.o test_dot test_dot_dyn test_complexe test_complexe2 test_axpy test_snrm2 test_gemv *~
+	rm -f *.o test_dot test_dot_dyn test_complexe test_complexe2 test_axpy test_snrm2 test_gemv test_gemm*~

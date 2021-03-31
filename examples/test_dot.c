@@ -118,7 +118,7 @@ printf("teste double\n");
      res = 0.0 ;
      
      start = _rdtsc () ;
-     mncblas_cdotc_sub (VECSIZE, vect_float_complexe1, 1, vect_float_complexe2, 1,testa) ;
+     mncblas_cdotu_sub (VECSIZE, vect_float_complexe1, 1, vect_float_complexe2, 1,testa) ;
      end = _rdtsc () ;
      
      printf ("mncblas_sdot %d : res = %3.2f nombre de cycles: %Ld \n", i, res, end-start) ;

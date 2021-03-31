@@ -72,14 +72,30 @@ int main(){
            vect_float_1[i]=1.1;
         }
         free(vect_float_2);
-        vect_float_2=malloc(sizeof(complexe_float_t)*VECSIZE);
+        vect_float_2=malloc(sizeof(float)*VECSIZE);
         start=_rdtsc();
         mncblas_scopy(VECSIZE,vect_float_1,1,vect_float_2,1);
         end=_rdtsc();
         printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
+    printf("test double\n");
 
+    free(vect_double_1);
+    init_flop();
+    vect_double_1=malloc(sizeof(double)*VECSIZE);
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_double_1[i]=1.1;
+        }
+        free(vect_double_2);
+        vect_double_2=malloc(sizeof(double)*VECSIZE);
+        start=_rdtsc();
+        mncblas_dcopy(VECSIZE,vect_double_1,1,vect_double_2,1);
+        end=_rdtsc();
+        printf("nombre de cycle:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
 
 
     printf("test complex float\n");

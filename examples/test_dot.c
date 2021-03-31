@@ -105,7 +105,7 @@ printf("teste double\n");
  complexe_float_t* test_float=malloc(sizeof(complexe_float_t));
  test_float->imaginary=0;
  test_float->real=0;
- void *testa=malloc(sizeof(complexe_float_t)*VECSIZE);
+ complexe_float_t *testa=malloc(sizeof(complexe_float_t));
  for (i = 0 ; i < NB_FOIS; i++)
    {
      for(int j=0;j<VECSIZE;j++){
@@ -118,7 +118,7 @@ printf("teste double\n");
      res = 0.0 ;
      
      start = _rdtsc () ;
-     mncblas_cdotc_sub (VECSIZE, vect_float_complexe1, 1, vect_float_complexe2, 1,testa) ;
+     mncblas_cdotu_sub (VECSIZE, vect_float_complexe1, 1, vect_float_complexe2, 1,testa) ;
      end = _rdtsc () ;
      
      printf ("mncblas_sdot %d : res = %3.2f nombre de cycles: %Ld \n", i, res, end-start) ;
@@ -132,7 +132,7 @@ printf("teste double\n");
  complexe_double_t* test_double=malloc(sizeof(complexe_double_t));
  test_double->imaginary=0;
  test_double->real=0;
- void *testd=malloc(sizeof(complexe_double_t)*VECSIZE);
+ complexe_double_t *testd=malloc(sizeof(complexe_double_t));
  for (i = 0 ; i < NB_FOIS; i++)
    {
      for(int j=0;j<VECSIZE;j++){

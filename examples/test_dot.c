@@ -24,6 +24,8 @@ void vector_init (vfloat V, float x)
   return ;
 }
 
+
+
 void vector_print (vfloat V)
 {
   register unsigned int i ;
@@ -59,7 +61,7 @@ int main (int argc, char **argv)
   mncblas_cdotu_sub(2, vc, 1, vc, 1, c);
 
   printf("résultat complexe : %f + %fi \n", c->real, c->imaginary);
-
+printf("test float\n");
  init_flop () ;
  
  for (i = 0 ; i < NB_FOIS; i++)
@@ -70,6 +72,55 @@ int main (int argc, char **argv)
      
      start = _rdtsc () ;
         res = mncblas_sdot (VECSIZE, vec1, 1, vec2, 1) ;
+     end = _rdtsc () ;
+     
+     printf ("mncblas_sdot %d : res = %3.2f nombre de cycles: %Ld \n", i, res, end-start) ;
+     calcul_flop ("sdot ", 2 * VECSIZE, end-start) ;
+   }
+printf("teste double\n");
+   init_flop () ;
+ double *vect_double1=malloc(VECSIZE*sizeof(double));
+ double *vect_double2=malloc(VECSIZE*sizeof(double));
+ printf("test double\n");
+ for (i = 0 ; i < NB_FOIS; i++)
+   {
+     for(int j=0;j<VECSIZE;j++){
+       vect_double1[j]=1.1;
+       vect_double2[j]=2.2;
+     }
+     res = 0.0 ;
+     
+     start = _rdtsc () ;
+        res = mncblas_ddot (VECSIZE, vect_double1, 1, vect_double2, 1) ;
+     end = _rdtsc () ;
+     
+     printf ("mncblas_sdot %d : res = %3.2f nombre de cycles: %Ld \n", i, res, end-start) ;
+     calcul_flop ("sdot ", 2 * VECSIZE, end-start) ;
+   }
+
+   printf("test complexe float\n");
+    init_flop () ;
+    
+ complexe_float_t* vect_float_complexe1=malloc(VECSIZE*sizeof(complexe_float_t));
+ complexe_float_t *vect_float_complexe2=malloc(VECSIZE*sizeof(complexe_float_t));
+ complexe_float_t* test_float=malloc(sizeof(complexe_float_t));
+ test_float->imaginary=0;
+ test_float->real=0;
+ void *testa=malloc(sizeof(complexe_float_t));
+ printf("test double\n");
+ for (i = 0 ; i < NB_FOIS; i++)
+   {
+     for(int j=0;j<VECSIZE;j++){
+       vect_float_complexe1[j].real=1.1;
+       vect_float_complexe2[j].real=2.2;
+
+       vect_float_complexe1[j].imaginary=1.1;
+       vect_float_complexe2[j].imaginary=2.2;
+     }
+     res = 0.0 ;
+     
+     start = _rdtsc () ;
+     //res = mncblas_cdotc_sub (VECSIZE, vect_float_complexe1, 1, vect_float_complexe2, 1,testa) ;
      end = _rdtsc () ;
      
      printf ("mncblas_sdot %d : res = %3.2f nombre de cycles: %Ld \n", i, res, end-start) ;

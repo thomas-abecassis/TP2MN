@@ -59,6 +59,38 @@ int main(){
     printf("zaxpy pour (2,2), {(1,1),(1,1)} et {(2,2),(2,2)} : {(%f, %f), (%f, %f)} \n", vect_cd_2[0].real, vect_cd_2[0].imaginary, vect_cd_2[1].real, vect_cd_2[1].imaginary);
 
     printf("\n\nteste performance\n");
+    printf("test float\n");
+    float * vect_float=malloc(sizeof(float)*VECSIZE);
+    float* vect_float2=malloc(sizeof(float)*VECSIZE);
+    init_flop();
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_float[i]=1.1;
+           vect_float2[i]=2.2;
+        }
+        start=_rdtsc();
+        mnblas_saxpy(VECSIZE,2.1,vect_float,1,vect_float2,1);
+        end=_rdtsc();
+        printf("nombre de cycle:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
+
+    printf("test double\n");
+    double * vect_double=malloc(sizeof(double)*VECSIZE);
+    double* vect_double2=malloc(sizeof(double)*VECSIZE);
+    init_flop();
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_double[i]=1.1;
+           vect_double2[i]=2.2;
+        }
+        start=_rdtsc();
+        mnblas_daxpy(VECSIZE,2.3,vect_double,1,vect_double2,1);
+        end=_rdtsc();
+        printf("nombre de cycle:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
+
     printf("test complex float\n");
     free(vect_cf_1);
     free(vect_cf_2);
@@ -80,8 +112,8 @@ int main(){
     free(vect_cd_1);
     free(vect_cd_2);
     init_flop();
-    vect_cf_1=malloc(sizeof(complexe_double_t)*VECSIZE);
-    vect_cf_2=malloc(sizeof(complexe_double_t)*VECSIZE);
+    vect_cd_1=malloc(sizeof(complexe_double_t)*VECSIZE);
+    vect_cd_2=malloc(sizeof(complexe_double_t)*VECSIZE);
     for(int i=0;i<NB_FOIS;i++){
         for(int i=0;i<VECSIZE;i++){
            vect_cd_1[i].imaginary=1.1;
@@ -93,5 +125,7 @@ int main(){
         printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
+
+    
     return 0;
 }

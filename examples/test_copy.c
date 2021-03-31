@@ -61,6 +61,27 @@ int main(){
     printf("vecteur double 2 : {%f + %fi, %f + %fi} \n", vect_cd_2[0].real, vect_cd_2[0].imaginary, vect_cd_2[1].real, vect_cd_2[1].imaginary);  
 
     printf("\n\nteste performance\n");
+
+    printf("test float\n");
+
+    free(vect_float_1);
+    init_flop();
+    vect_float_1=malloc(sizeof(float)*VECSIZE);
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_float_1[i]=1.1;
+        }
+        free(vect_float_2);
+        vect_float_2=malloc(sizeof(complexe_float_t)*VECSIZE);
+        start=_rdtsc();
+        mncblas_scopy(VECSIZE,vect_float_1,1,vect_float_2,1);
+        end=_rdtsc();
+        printf("nombre de cycle:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
+
+
+
     printf("test complex float\n");
     free(vect_cf_1);
     init_flop();

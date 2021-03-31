@@ -99,7 +99,7 @@ complexe_double_t div_complexe_double (const complexe_double_t c1, const complex
   return c;
 }
 
-complexe_float_t scal_complexe_float(const complexe_float_t c, int x){
+complexe_float_t scal_complexe_float(const complexe_float_t c, float x){
   complexe_float_t ret;
 
   ret.real = c.real * x;
@@ -108,7 +108,7 @@ complexe_float_t scal_complexe_float(const complexe_float_t c, int x){
   return ret;
 }
   
-complexe_double_t scal_complexe_double(const complexe_double_t c, int x){
+complexe_double_t scal_complexe_double(const complexe_double_t c, double x){
   complexe_double_t ret;
 
   ret.real = c.real * x;

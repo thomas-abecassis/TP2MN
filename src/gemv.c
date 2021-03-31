@@ -13,7 +13,7 @@ void mncblas_sgemv(const MNCBLAS_LAYOUT layout,
     int row = N;
     int col = M;
 
-    for (int i= 0; i< row*col ; i += incX){
+    for (int i= 0; i< row ; i += incX){
         float value = 0;
         int t = col;
         if(TransA != MNCblasNoTrans)
@@ -36,7 +36,7 @@ void mncblas_dgemv(MNCBLAS_LAYOUT layout,
     int row = N;
     int col = M;
 
-    for (int i= 0; i< row*col ; i += incX){
+    for (int i= 0; i< row ; i += incX){
         double value = 0;
         int t = col;
         if(TransA != MNCblasNoTrans)
@@ -97,7 +97,7 @@ void mncblas_zgemv(MNCBLAS_LAYOUT layout,
     complexe_double_t Alphac= *(complexe_double_t*) alpha;
     complexe_double_t Betac= *(complexe_double_t*) beta;
     
-    for (int i= 0; i< row*col ; i += incX){
+    for (int i= 0; i< row ; i += incX){
         complexe_double_t value = {0,0};
         int t = col;
         if(TransA != MNCblasNoTrans)

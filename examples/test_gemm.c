@@ -105,20 +105,27 @@ int main(){
         printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
     }
-/*
+
     printf("test complex float\n");
     free(vect_cf_1);
     free(vect_cf_2);
     init_flop();
     vect_cf_1=malloc(sizeof(complexe_float_t)*VECSIZE);
     vect_cf_2=malloc(sizeof(complexe_float_t)*VECSIZE);
+    complexe_float_t* result_complex_float=malloc(sizeof(complexe_float_t)*VECSIZE*VECSIZE);
+    for(int i=0;i<VECSIZE*VECSIZE;i++){
+        result_complex_float[i].imaginary=1.1;
+        result_complex_float[i].real=0.5;
+    }
     for(int i=0;i<NB_FOIS;i++){
         for(int i=0;i<VECSIZE;i++){
            vect_cf_1[i].imaginary=1.1;
            vect_cf_1[i].real=2.2;
+           vect_cf_2[i].imaginary=1.1;
+           vect_cf_2[i].real=1.1;
         }
         start=_rdtsc();
-        mnblas_caxpy(VECSIZE,&a,vect_cf_1,1,vect_cf_2,1);
+        mncblas_cgemm(101,111,111, VECSIZE, VECSIZE, 15, &scal, vect_cf_1, 1, vect_cf_2, 1, &scal, result_complex_float, 1);
         end=_rdtsc();
         printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
@@ -129,17 +136,25 @@ int main(){
     init_flop();
     vect_cd_1=malloc(sizeof(complexe_double_t)*VECSIZE);
     vect_cd_2=malloc(sizeof(complexe_double_t)*VECSIZE);
+    complexe_double_t* result_complex_double=malloc(sizeof(complexe_double_t)*VECSIZE*VECSIZE);
+    for(int i=0;i<VECSIZE*VECSIZE;i++){
+        result_complex_double[i].imaginary=1.1;
+        result_complex_double[i].real=0.5;
+    }
+
     for(int i=0;i<NB_FOIS;i++){
         for(int i=0;i<VECSIZE;i++){
            vect_cd_1[i].imaginary=1.1;
            vect_cd_1[i].real=2.2;
+           vect_cd_2[i].real=1;
+           vect_cd_2[i].imaginary=0.5;
         }
         start=_rdtsc();
-        mnblas_zaxpy(VECSIZE,&ad,vect_cd_1,1,vect_cd_2,1);
+        mncblas_zgemm(101,111,111, VECSIZE, VECSIZE, 15, &scal, vect_cf_1, 1, vect_cf_2, 1, &scal, result_complex_float, 1);
         end=_rdtsc();
         printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
-    }*/
+    }
 
 
     return 0;

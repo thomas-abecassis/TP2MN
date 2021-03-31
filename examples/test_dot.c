@@ -101,7 +101,7 @@ printf("teste double\n");
     init_flop () ;
     
  complexe_float_t* vect_float_complexe1=malloc(VECSIZE*sizeof(complexe_float_t));
- complexe_float_t *vect_float_complexe2=malloc(VECSIZE*sizeof(complexe_float_t));
+ complexe_float_t* vect_float_complexe2=malloc(VECSIZE*sizeof(complexe_float_t));
  complexe_float_t* test_float=malloc(sizeof(complexe_float_t));
  test_float->imaginary=0;
  test_float->real=0;

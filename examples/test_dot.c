@@ -81,7 +81,6 @@ printf("teste double\n");
    init_flop () ;
  double *vect_double1=malloc(VECSIZE*sizeof(double));
  double *vect_double2=malloc(VECSIZE*sizeof(double));
- printf("test double\n");
  for (i = 0 ; i < NB_FOIS; i++)
    {
      for(int j=0;j<VECSIZE;j++){
@@ -106,8 +105,7 @@ printf("teste double\n");
  complexe_float_t* test_float=malloc(sizeof(complexe_float_t));
  test_float->imaginary=0;
  test_float->real=0;
- void *testa=malloc(sizeof(complexe_float_t));
- printf("test double\n");
+ void *testa=malloc(sizeof(complexe_float_t)*VECSIZE);
  for (i = 0 ; i < NB_FOIS; i++)
    {
      for(int j=0;j<VECSIZE;j++){
@@ -120,10 +118,39 @@ printf("teste double\n");
      res = 0.0 ;
      
      start = _rdtsc () ;
-     //res = mncblas_cdotc_sub (VECSIZE, vect_float_complexe1, 1, vect_float_complexe2, 1,testa) ;
+     mncblas_cdotc_sub (VECSIZE, vect_float_complexe1, 1, vect_float_complexe2, 1,testa) ;
      end = _rdtsc () ;
      
      printf ("mncblas_sdot %d : res = %3.2f nombre de cycles: %Ld \n", i, res, end-start) ;
      calcul_flop ("sdot ", 2 * VECSIZE, end-start) ;
    }
+
+
+ printf("test complex double");
+ complexe_double_t* vect_double_complexe1=malloc(VECSIZE*sizeof(complexe_double_t));
+ complexe_double_t *vect_double_complexe2=malloc(VECSIZE*sizeof(complexe_double_t));
+ complexe_double_t* test_double=malloc(sizeof(complexe_double_t));
+ test_double->imaginary=0;
+ test_double->real=0;
+ void *testd=malloc(sizeof(complexe_double_t)*VECSIZE);
+ for (i = 0 ; i < NB_FOIS; i++)
+   {
+     for(int j=0;j<VECSIZE;j++){
+       vect_double_complexe1[j].real=1.1;
+       vect_double_complexe2[j].real=2.2;
+
+       vect_double_complexe1[j].imaginary=1.1;
+       vect_double_complexe2[j].imaginary=2.2;
+     }
+     res = 0.0 ;
+     
+     start = _rdtsc () ;
+     mncblas_zdotc_sub (VECSIZE, vect_double_complexe1, 1, vect_double_complexe2, 1,testd) ;
+     end = _rdtsc () ;
+     
+     printf ("mncblas_sdot %d : res = %3.2f nombre de cycles: %Ld \n", i, res, end-start) ;
+     calcul_flop ("sdot ", 2 * VECSIZE, end-start) ;
+   }
+
+
 }

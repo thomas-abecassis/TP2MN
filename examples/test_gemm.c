@@ -6,7 +6,7 @@
 
 #include "flop.h"
 
-#define VECSIZE    256
+#define VECSIZE    256*256
 
 #define NB_FOIS    10
 
@@ -68,8 +68,8 @@ int main(){
     unsigned long long start,end;
     float * vect_float=malloc(sizeof(float)*VECSIZE);
     float* vect_float2=malloc(sizeof(float)*VECSIZE);
-    float *result_float=malloc(sizeof(float)*VECSIZE*VECSIZE);
-    for(int i=0;i<VECSIZE*VECSIZE;i++){
+    float *result_float=malloc(sizeof(float)*VECSIZE);
+    for(int i=0;i<VECSIZE;i++){
         result_float[i]=1;
     }
     init_flop();
@@ -89,8 +89,8 @@ int main(){
     printf("test double\n");
     double * vect_double=malloc(sizeof(double)*VECSIZE);
     double* vect_double2=malloc(sizeof(double)*VECSIZE);
-    double* result_double=malloc(sizeof(double)*VECSIZE*VECSIZE);
-    for(int i=0;i<VECSIZE*VECSIZE;i++){
+    double* result_double=malloc(sizeof(double)*VECSIZE);
+    for(int i=0;i<VECSIZE;i++){
         result_double[i]=1;
     }
     init_flop();
@@ -112,8 +112,8 @@ int main(){
     init_flop();
     vect_cf_1=malloc(sizeof(complexe_float_t)*VECSIZE);
     vect_cf_2=malloc(sizeof(complexe_float_t)*VECSIZE);
-    complexe_float_t* result_complex_float=malloc(sizeof(complexe_float_t)*VECSIZE*VECSIZE);
-    for(int i=0;i<VECSIZE*VECSIZE;i++){
+    complexe_float_t* result_complex_float=malloc(sizeof(complexe_float_t)*VECSIZE);
+    for(int i=0;i<VECSIZE;i++){
         result_complex_float[i].imaginary=1.1;
         result_complex_float[i].real=0.5;
     }
@@ -136,8 +136,8 @@ int main(){
     init_flop();
     vect_cd_1=malloc(sizeof(complexe_double_t)*VECSIZE);
     vect_cd_2=malloc(sizeof(complexe_double_t)*VECSIZE);
-    complexe_double_t* result_complex_double=malloc(sizeof(complexe_double_t)*VECSIZE*VECSIZE);
-    for(int i=0;i<VECSIZE*VECSIZE;i++){
+    complexe_double_t* result_complex_double=malloc(sizeof(complexe_double_t)*VECSIZE);
+    for(int i=0;i<VECSIZE;i++){
         result_complex_double[i].imaginary=1.1;
         result_complex_double[i].real=0.5;
     }

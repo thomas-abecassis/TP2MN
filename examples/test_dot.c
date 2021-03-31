@@ -101,11 +101,11 @@ printf("teste double\n");
     init_flop () ;
     
  complexe_float_t* vect_float_complexe1=malloc(VECSIZE*sizeof(complexe_float_t));
- complexe_float_t *vect_float_complexe2=malloc(VECSIZE*sizeof(complexe_float_t));
+ complexe_float_t* vect_float_complexe2=malloc(VECSIZE*sizeof(complexe_float_t));
  complexe_float_t* test_float=malloc(sizeof(complexe_float_t));
  test_float->imaginary=0;
  test_float->real=0;
- void *testa=malloc(sizeof(complexe_float_t)*VECSIZE);
+ complexe_float_t *testa=malloc(sizeof(complexe_float_t));
  for (i = 0 ; i < NB_FOIS; i++)
    {
      for(int j=0;j<VECSIZE;j++){
@@ -132,7 +132,7 @@ printf("teste double\n");
  complexe_double_t* test_double=malloc(sizeof(complexe_double_t));
  test_double->imaginary=0;
  test_double->real=0;
- void *testd=malloc(sizeof(complexe_double_t)*VECSIZE);
+ complexe_double_t *testd=malloc(sizeof(complexe_double_t));
  for (i = 0 ; i < NB_FOIS; i++)
    {
      for(int j=0;j<VECSIZE;j++){

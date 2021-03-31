@@ -80,7 +80,7 @@ int main(){
            
         }
         start=_rdtsc();
-        mncblas_sgemm(101,111,111, VECSIZE, VECSIZE, 15, 1, vect_float, 1, vect_float2, 1, 1, result_float, 1);
+        mncblas_sgemm(101,111,111, 256, 256, 15, 1, vect_float, 1, vect_float2, 1, 1, result_float, 1);
         end=_rdtsc();
         printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
@@ -100,7 +100,7 @@ int main(){
            vect_double2[i]=2.2;
         }
         start=_rdtsc();
-        mncblas_dgemm(101,111,111, VECSIZE, VECSIZE, 15, 1, vect_double, 1, vect_double2, 1, 1, result_double, 1);
+        mncblas_dgemm(101,111,111, 256, 256, 15, 1, vect_double, 1, vect_double2, 1, 1, result_double, 1);
         end=_rdtsc();
         printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
@@ -125,7 +125,7 @@ int main(){
            vect_cf_2[i].real=1.1;
         }
         start=_rdtsc();
-        mncblas_cgemm(101,111,111, VECSIZE, VECSIZE, 15, &scal, vect_cf_1, 1, vect_cf_2, 1, &scal, result_complex_float, 1);
+        mncblas_cgemm(101,111,111, 256, 256, 15, &scal, vect_cf_1, 1, vect_cf_2, 1, &scal, result_complex_float, 1);
         end=_rdtsc();
         printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);
@@ -150,7 +150,7 @@ int main(){
            vect_cd_2[i].imaginary=0.5;
         }
         start=_rdtsc();
-        mncblas_zgemm(101,111,111, VECSIZE, VECSIZE, 15, &scal, vect_cf_1, 1, vect_cf_2, 1, &scal, result_complex_float, 1);
+        mncblas_zgemm(101,111,111, 256, 256, 15, &scal, vect_cf_1, 1, vect_cf_2, 1, &scal, result_complex_float, 1);
         end=_rdtsc();
         printf("nombre de cycle:%Ld ",end-start);
         calcul_flop("sdot ", 2 * VECSIZE, end-start);

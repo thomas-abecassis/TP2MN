@@ -6,6 +6,10 @@
 
 #include "flop.h"
 
+#define VECSIZE    256
+
+#define NB_FOIS    10
+
 int main(){
 
     float fv1[6] = {1,2,1,2,1,2};
@@ -59,6 +63,85 @@ int main(){
 
     printf("zgemm pour : {(%f,%f),(%f,%f),(%f,%f),(%f,%f)} \n", matd[0].real, matd[0].imaginary, matd[1].real, matd[1].imaginary, matd[2].real, matd[2].imaginary, matd[3].real, matd[3].imaginary);
     
+    printf("\n\ndebut test performance\n");
+    
+    unsigned long long start,end;
+    float * vect_float=malloc(sizeof(float)*VECSIZE);
+    float* vect_float2=malloc(sizeof(float)*VECSIZE);
+    float *result_float=malloc(sizeof(float)*VECSIZE*VECSIZE);
+    for(int i=0;i<VECSIZE*VECSIZE;i++){
+        result_float[i]=1;
+    }
+    init_flop();
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_float[i]=1.1;
+           vect_float2[i]=2.2;
+           
+        }
+        start=_rdtsc();
+        mncblas_sgemm(101,111,111, VECSIZE, VECSIZE, 15, 1, vect_float, 1, vect_float2, 1, 1, result_float, 1);
+        end=_rdtsc();
+        printf("nombre de cycle:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
+
+    printf("test double\n");
+    double * vect_double=malloc(sizeof(double)*VECSIZE);
+    double* vect_double2=malloc(sizeof(double)*VECSIZE);
+    double* result_double=malloc(sizeof(double)*VECSIZE*VECSIZE);
+    for(int i=0;i<VECSIZE*VECSIZE;i++){
+        result_double[i]=1;
+    }
+    init_flop();
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_double[i]=1.1;
+           vect_double2[i]=2.2;
+        }
+        start=_rdtsc();
+        mncblas_dgemm(101,111,111, VECSIZE, VECSIZE, 15, 1, vect_double, 1, vect_double2, 1, 1, result_double, 1);
+        end=_rdtsc();
+        printf("nombre de cycle:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
+/*
+    printf("test complex float\n");
+    free(vect_cf_1);
+    free(vect_cf_2);
+    init_flop();
+    vect_cf_1=malloc(sizeof(complexe_float_t)*VECSIZE);
+    vect_cf_2=malloc(sizeof(complexe_float_t)*VECSIZE);
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_cf_1[i].imaginary=1.1;
+           vect_cf_1[i].real=2.2;
+        }
+        start=_rdtsc();
+        mnblas_caxpy(VECSIZE,&a,vect_cf_1,1,vect_cf_2,1);
+        end=_rdtsc();
+        printf("nombre de cycle:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }
+    printf("test complex double\n");
+    free(vect_cd_1);
+    free(vect_cd_2);
+    init_flop();
+    vect_cd_1=malloc(sizeof(complexe_double_t)*VECSIZE);
+    vect_cd_2=malloc(sizeof(complexe_double_t)*VECSIZE);
+    for(int i=0;i<NB_FOIS;i++){
+        for(int i=0;i<VECSIZE;i++){
+           vect_cd_1[i].imaginary=1.1;
+           vect_cd_1[i].real=2.2;
+        }
+        start=_rdtsc();
+        mnblas_zaxpy(VECSIZE,&ad,vect_cd_1,1,vect_cd_2,1);
+        end=_rdtsc();
+        printf("nombre de cycle:%Ld ",end-start);
+        calcul_flop("sdot ", 2 * VECSIZE, end-start);
+    }*/
+
+
     return 0;
 
 }
